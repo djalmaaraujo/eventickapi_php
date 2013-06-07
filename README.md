@@ -35,7 +35,7 @@ Return information about a specific event.
 *Type: `Integer` Required: `true`*
 
 
-### attendees($eventId, $checkedAfter = null)
+### attendees($eventId, $checkedAfter)
 Return all attendees from specific event.
 You can pass at the second parameter the ```$checkedAfter``` to return all attendees checked after a specific date.
 
@@ -45,7 +45,7 @@ You can pass at the second parameter the ```$checkedAfter``` to return all atten
 
 ##### $checkedAfter
 
-*Type: `String` Required: `false` Format: `2012-10-17T16:54:35-03:00 (ISO 8601)`*
+*Type: `String` Required: `false` Default: `null` Format: `2012-10-17T16:54:35-03:00 (ISO 8601)`*
 
 ### attendee($eventId, $id)
 Return information about a specific attendee in a event
@@ -58,12 +58,24 @@ Return information about a specific attendee in a event
 
 *Type: `Integer` Required: `true`*
 
-### (Not available yet) attendeeCheckin($eventId, ...)
-Allows you to mark one or more attendee as checked (check-in done) into an event.
+### attendeeCheckin($eventId, $code, $checkedAt)
+Allows you to mark one attendee as checked (check-in done) into an event.
 
-## 
+##### For single check-in:
+##### $eventId
 
-##### For multiple check-in:
+*Type: `Integer` Required: `true`*
+
+##### $code
+*Type: `String` Required: `true`*
+
+##### $checkedAt
+*Type: `String` Required: `true` Format: `2012-10-17T16:54:35-03:00 (ISO 8601)`*
+
+
+### attendeesCheckin()
+Allows you to mark multiples attendees as checked (check-in done) into an event.
+
 ##### $eventId
 
 *Type: `Integer` Required: `true`*
@@ -84,22 +96,6 @@ $params = array(
 ```
 * id is the attendee ID
 * checked_at must be in ISO 8601 format.
-
-## 
-
-##### For single check-in:
-##### $eventId
-
-*Type: `Integer` Required: `true`*
-
-##### $code
-*Type: `String` Required: `true`*
-
-##### $checkedAt
-*Type: `String` Required: `true` Format: `2012-10-17T16:54:35-03:00 (ISO 8601)`*
-
--
-
 
 ## Eventick
 All Eventick API is available at: [http://developer.eventick.com.br/](http://developer.eventick.com.br/)
