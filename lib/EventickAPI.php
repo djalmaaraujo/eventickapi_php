@@ -74,6 +74,18 @@ class EventickAPI {
     return $this->result->attendees[0];
   }
 
+  public function attendeeCheckin($eventId = null, $code = null, $checkedAt = null) {
+    $params = array(
+      'event_id' => $eventId,
+      'code' => $code,
+      'checked_at' => $checkedAt
+    );
+
+    $this->request('attendeeCheckin', $params);
+
+    return Http::isSuccess();
+  }
+
   # Private
 
   private function request($type = null, $params = null) {
@@ -95,9 +107,7 @@ class EventickAPI {
         break;
 
       case 'attendees':
-        if (isset($params['checked_after']) && ($params['checked_after'] !== null)) {
-          $getParams = array('checked_after' => $params['checked_after']);
-        }
+        $getParams = (isset($params['checked_after']) && ($params['checked_after'] !== null)) ? array('checked_after' => $params['checked_after']) : false;
 
         $this->setAuth(array('token' => $this->token));
         $this->setResult(Http::get($apiURL . 'events/' . $params['event_id'] . '/attendees' . $this->apiURLResponseFormat, $getParams));
@@ -106,6 +116,13 @@ class EventickAPI {
       case 'attendee':
         $this->setAuth(array('token' => $this->token));
         $this->setResult(Http::get($apiURL . 'events/' . $params['event_id'] . '/attendees/' . $params['id'] . $this->apiURLResponseFormat));
+        break;
+
+      case 'attendeeCheckin':
+        $getParams = array('checked_at' => $params['checked_at']);
+
+        $this->setAuth(array('token' => $this->token));
+        Http::put($apiURL . 'events/' . $params['event_id'] . '/attendees/' . $params['code'] . $this->apiURLResponseFormat, $getParams);
         break;
 
       default:

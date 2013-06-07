@@ -58,7 +58,7 @@ Return information about a specific attendee in a event
 
 *Type: `Integer` Required: `true`*
 
-### (Not available yet) attendeeCheckin($eventId, $params)
+### (Not available yet) attendeeCheckin($eventId, ...)
 Allows you to mark one or more attendee as checked (check-in done) into an event.
 
 ## 
@@ -75,13 +75,14 @@ Allows you to mark one or more attendee as checked (check-in done) into an event
 
 ```php
 $params = array(
-  'user_id' => checked_at,
-  'user_id2' => checked_at2,
-  'user_id3' => checked_at3,
-  'user_id4' => checked_at4,
-  'user_id5' => checked_at5
+  array('id' => 1, 'checked_at' => '2012-10-17T16:54:35-03:00'),
+  array('id' => 2, 'checked_at' => '2012-10-17T16:54:35-03:00'),
+  array('id' => 3, 'checked_at' => '2012-10-17T16:54:35-03:00'),
+  array('id' => 4, 'checked_at' => '2012-10-17T16:54:35-03:00'),
+  array('id' => 5, 'checked_at' => '2012-10-17T16:54:35-03:00'),
 );
 ```
+* id is the attendee ID
 * checked_at must be in ISO 8601 format.
 
 ## 

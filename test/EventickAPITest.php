@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Recife');
+
 use Eventick\Lib\EventickAPI;
 
 class EventickAPITest extends PHPUnit_Framework_TestCase {
@@ -60,11 +62,28 @@ class EventickAPITest extends PHPUnit_Framework_TestCase {
 
     $firstEvent = $events[0];
 
-    $attendees = $api->attendees($firstEvent->id, '2012-10-17T16:54:35-03:00');
+    $attendees = $api->attendees($firstEvent->id);
 
     $attendee = $api->attendee($firstEvent->id, $attendees[0]->id);
 
     $this->assertNotNull($attendee->id);
+  }
+
+  public function testAttendeeSingleCheckin() {
+    $api = $this->returnInstance();
+    $api->auth();
+
+    $events = $api->events();
+    $firstEvent = $events[0];
+    $attendees = $api->attendees($firstEvent->id);
+    $attendee = $attendees[0];
+    $now = $this->now();
+
+    $api->attendeeCheckin($firstEvent->id, $attendee->code, $now);
+
+    $checkAttendee = $api->attendee($firstEvent->id, $attendee->id);
+
+    $this->assertEquals($checkAttendee->checked_at, $now);
   }
 
   # Private
@@ -75,5 +94,9 @@ class EventickAPITest extends PHPUnit_Framework_TestCase {
     $api->setCredentials(TEST_CREDENTIALS_USERNAME, TEST_CREDENTIALS_PASSWORD);
 
     return $api;
+  }
+
+  private function now() {
+    return date('Y-m-d\TH:i:s') . '-03:00';
   }
 }
