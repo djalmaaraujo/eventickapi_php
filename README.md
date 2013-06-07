@@ -19,6 +19,8 @@ To run your tests, first insert your Eventick credentials in ```test/testCredent
 
 After setup your credentials, run ```phpunit```.
 
+*FYI: You have to create an event in Eventick with at least two attendees to have tests passing.*
+
 ## Documentation
 
 ### auth()
@@ -73,7 +75,7 @@ Allows you to mark one attendee as checked (check-in done) into an event.
 *Type: `String` Required: `true` Format: `2012-10-17T16:54:35-03:00 (ISO 8601)`*
 
 
-### attendeesCheckin()
+### (WIP) attendeesCheckin()
 Allows you to mark multiples attendees as checked (check-in done) into an event.
 
 ##### $eventId
