@@ -14,12 +14,10 @@ $events = $api->events(); // Grab events
 ...
 ```
 
-## 
-
 ## Tests
 To run your tests, first insert your Eventick credentials in ```test/testCredentials.php```. That's required because the library is not using Mocks or Stubs, just because PHP tests are trash. =)
 
-After setup your credentials, run ```phpunit```. 
+After setup your credentials, run ```phpunit```.
 
 ## Documentation
 
@@ -32,12 +30,79 @@ Return all events from your logged account.
 ### event($eventId)
 Return information about a specific event.
 
+##### $eventId
+
+*Type: `Integer` Required: `true`*
+
+
 ### attendees($eventId, $checkedAfter = null)
 Return all attendees from specific event.
-You can pass at the second parameter the ```$checkedAfter``` to return all attendees checked after a specific date. Format: **2012-10-17T16:54:35-03:00**
+You can pass at the second parameter the ```$checkedAfter``` to return all attendees checked after a specific date.
+
+##### $eventId
+
+*Type: `Integer` Required: `true`*
+
+##### $checkedAfter
+
+*Type: `String` Required: `false` Format: `2012-10-17T16:54:35-03:00 (ISO 8601)`*
 
 ### attendee($eventId, $id)
 Return information about a specific attendee in a event
+
+##### $eventId
+
+*Type: `Integer` Required: `true`*
+
+##### $id
+
+*Type: `Integer` Required: `true`*
+
+### (Not available yet) attendeeCheckin($eventId, $params)
+Allows you to mark one or more attendee as checked (check-in done) into an event.
+
+## 
+
+##### For multiple check-in:
+##### $eventId
+
+*Type: `Integer` Required: `true`*
+
+##### $params
+*Type: `Array` Required: `true`*
+
+*Expected array:*
+
+```php
+$params = array(
+  'user_id' => checked_at,
+  'user_id2' => checked_at2,
+  'user_id3' => checked_at3,
+  'user_id4' => checked_at4,
+  'user_id5' => checked_at5
+)
+```
+* checked_at must be in ISO 8601 format.
+
+## 
+
+##### For single check-in:
+##### $eventId
+
+*Type: `Integer` Required: `true`*
+
+##### $code
+*Type: `String` Required: `true`*
+
+##### $checkedAt
+*Type: `String` Required: `true` Format: `2012-10-17T16:54:35-03:00 (ISO 8601)`*
+
+-
+
+
+## Eventick
+All Eventick API is available at: [http://developer.eventick.com.br/](http://developer.eventick.com.br/)
+This library was built on top of Eventick API v1.
 
 ## MIT License
 Copyright (c) 2013 Djalma Araújo
