@@ -23,6 +23,22 @@ After setup your credentials, run ```phpunit```.
 
 ## Documentation
 
+### auth()
+This method request a token from eventick API and set the ```EventickAPI::loggedIn``` public attribute to true.
+
+### events()
+Return all events from your logged account.
+
+### event($eventId)
+Return information about a specific event.
+
+### attendees($eventId, $checkedAfter = null)
+Return all attendees from specific event.
+You can pass at the second parameter the ```$checkedAfter``` to return all attendees checked after a specific date. Format: **2012-10-17T16:54:35-03:00**
+
+### attendee($eventId, $id)
+Return information about a specific attendee in a event
+
 ## MIT License
 Copyright (c) 2013 Djalma Araújo
 
