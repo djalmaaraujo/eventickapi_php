@@ -80,7 +80,7 @@ $params = array(
   'user_id3' => checked_at3,
   'user_id4' => checked_at4,
   'user_id5' => checked_at5
-)
+);
 ```
 * checked_at must be in ISO 8601 format.
 
